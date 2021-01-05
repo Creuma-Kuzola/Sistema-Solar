@@ -8,6 +8,7 @@ package sistema.solar;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
 import javax.swing.JPanel;
 
@@ -18,8 +19,9 @@ import javax.swing.JPanel;
 public class PainelSistemaSolar extends JPanel implements Runnable {
     
     private final Thread thread;
-    private int terraAngulo = 0;
-    private int luaAngulo = 0;
+    private float terraAngulo = 0;
+    private float luaAngulo = 0;
+    
     
     public PainelSistemaSolar(){
     
@@ -41,6 +43,8 @@ public class PainelSistemaSolar extends JPanel implements Runnable {
         Ellipse2D terra = new Ellipse2D.Double(390, 210, 40, 40);
         // Posição do sol é o final da posição da terra + 80
         Ellipse2D lua = new Ellipse2D.Double(430, 250, 10, 10);
+        
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         //Sol
         g2d.setPaint(new Color(235,210,29));
@@ -67,8 +71,8 @@ public class PainelSistemaSolar extends JPanel implements Runnable {
             while(true)
             {
 
-                this.terraAngulo = (int) (this.terraAngulo >= 360 ? 0 : 1 + this.terraAngulo);
-                this.luaAngulo = (int) (this.luaAngulo >= 360 ? 0 : 1 + this.luaAngulo);
+                this.terraAngulo = (float) (this.terraAngulo >= 360 ? 0 : 1.9 + this.terraAngulo);
+                this.luaAngulo = (float) (this.luaAngulo >= 360 ? 0 : 1.9 + this.luaAngulo);
                 Thread.sleep(10);
                 super.repaint();
             
